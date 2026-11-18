@@ -7,9 +7,10 @@
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="Передайте текст между телефоном и компьютером по прямому соединению.">
   <title>Мост — общий буфер обмена</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261118">
   <script src="vendor/peerjs.min.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="https-bridge.js?v=20261118" defer></script>
+  <script src="app.js?v=20261118" defer></script>
 </head>
 <body>
 <header><a class="brand" href="./"><span class="logo">⇄</span> мост<span class="tag">буфер обмена</span></a><span class="top-note">с устройства на устройство</span></header>
@@ -18,6 +19,7 @@
   <section class="connection card" aria-labelledby="connection-title">
     <div class="section-head"><h2 id="connection-title">01 <span>Соедините устройства</span></h2><span id="status" class="status" role="status">Не подключено</span></div>
     <p id="instructions">Создайте мост и откройте его ссылку на втором устройстве. Обе страницы должны оставаться открытыми.</p>
+    <p><a id="compat-mode" href="?mode=https">Не соединяется? Режим HTTPS</a></p>
     <div class="row"><button id="connect" class="primary">Создать мост <span>↗</span></button><button id="copy-link" hidden>Копировать ссылку</button><button id="new-room" hidden>Новый мост</button></div>
     <div id="invite" hidden><label for="room-link">Ссылка для второго устройства</label><input id="room-link" readonly spellcheck="false"><small>Ссылка даёт доступ к этому мосту. Передавайте её только своему устройству.</small></div>
   </section>
@@ -26,6 +28,7 @@
     <section class="card receiver"><div class="section-head"><h2>03 <span>Заберите на другом</span></h2><button id="copy-text" class="text-button" disabled>Скопировать</button></div><div id="empty" class="empty"><span class="empty-icon">↙</span><p>Здесь появится текст</p><small>Всё полученное остаётся только в этой вкладке.</small></div><label class="sr-only" for="incoming">Полученный текст</label><textarea id="incoming" readonly hidden></textarea><div class="received-footer"><span id="received-time">Ожидаем первое сообщение</span><button id="clear" class="text-button" disabled>Очистить</button></div></section>
   </div>
   <p id="notice" class="notice" role="status" aria-live="polite">Текст отправляется только по вашей команде.</p>
-  <footer><span>↔ Прямое соединение WebRTC</span><p>Для соединения используется публичный сервер PeerJS. Переписка не сохраняется приложением. В некоторых сетях соединение может быть недоступно — попробуйте другую сеть или отключите VPN.</p><p>Браузер может запросить доступ к буферу. Если кнопка «Вставить» недоступна, используйте обычную вставку в поле. Поддерживается текст.</p></footer>
+  <footer><span id="connection-mode">↔ Прямое соединение WebRTC</span><p id="privacy-note">Для соединения используется публичный сервер PeerJS. Переписка не сохраняется приложением. Если устройства не соединяются, попробуйте режим HTTPS по ссылке выше.</p><p>Браузер может запросить доступ к буферу. Если кнопка «Вставить» недоступна, используйте обычную вставку в поле. Поддерживается текст.</p></footer>
 </main>
 </body></html>
+

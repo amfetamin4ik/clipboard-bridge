@@ -20,7 +20,7 @@ function page(hash = '') {
   const elements = new Map();
   const el = id => { if (!elements.has(id)) elements.set(id, { value: '', textContent: '', hidden: false, disabled: false, classList: {toggle() {}}, focus() {}, select() {}, click() { if (!this.disabled) this.onclick?.(); }, dispatchEvent() { this.oninput?.(); } }); return elements.get(id); };
   let timer = 0;
-  const context = vm.createContext({ Peer, crypto, document: { getElementById: el }, location: { hash, href: 'https://example.com/' + hash }, history: {replaceState() {}}, navigator: { clipboard: {writeText: async () => {}, readText: async () => 'clipboard'} }, window: {addEventListener() {}}, setTimeout: () => ++timer, clearTimeout() {}, Event: class {} });
+  const context = vm.createContext({ Peer, crypto, URLSearchParams, document: { getElementById: el }, location: { hash, href: 'https://example.com/' + hash }, history: {replaceState() {}}, navigator: { clipboard: {writeText: async () => {}, readText: async () => 'clipboard'} }, window: {addEventListener() {}}, setTimeout: () => ++timer, clearTimeout() {}, Event: class {} });
   vm.runInContext(code, context);
   return { el, context };
 }
@@ -47,3 +47,4 @@ function page(hash = '') {
   assert.equal(guest.el('incoming').value.length, 100000);
   console.log('PASS: pairing, bidirectional text, delivery ACK, Unicode, inert HTML, invalid secret, size limits, clear');
 })().catch(error => { console.error(error); process.exitCode = 1; });
+

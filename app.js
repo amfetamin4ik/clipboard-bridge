@@ -1,4 +1,6 @@
 'use strict';
+(() => {
+if (new URLSearchParams(location.search || '').get('mode') === 'https') { startHttpsBridge(); return; }
 const $ = id => document.getElementById(id);
 const MAX = 100000;
 let peer, connection, active = false, ready = false, joining = false, room, secret, attempt = 0;
@@ -116,3 +118,5 @@ $('copy-text').onclick = () => copy($('incoming').value, $('incoming'));
 $('clear').onclick = () => { $('incoming').value = ''; $('incoming').hidden = true; $('empty').hidden = false; $('copy-text').disabled = true; $('clear').disabled = true; $('received-time').textContent = 'Ожидаем новое сообщение'; notice('Полученный текст очищен на этом устройстве.'); };
 if (location.hash) { $('instructions').textContent = 'Подключитесь к первому устройству. Страница с созданным мостом должна оставаться открытой.'; $('connect').textContent = 'Подключиться к мосту'; }
 window.addEventListener('hashchange', () => location.reload());
+})();
+
